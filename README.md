@@ -10,4 +10,4 @@ SCHEMA_ID=SCHEMA_ID
 ```
 
 ## Usage
-Run node 
+Run ```npm run watch``` or ```npm run start```

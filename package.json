@@ -1,0 +1,22 @@
+{
+  "name": "nft-notary",
+  "version": "1.0.0",
+  "description": "Notary for maintaining NFT ownership using Sign Protocol",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node --env-file=.env index.js",
+    "watch": "nodemon --exec npm start"
+  },
+  "author": "Nishkarsh Jain",
+  "license": "ISC",
+  "dependencies": {
+    "@ethersproject/providers": "^5.7.2",
+    "@ethsign/sp-sdk": "^0.7.3",
+    "express": "^4.19.2",
+    "viem": "^2.21.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

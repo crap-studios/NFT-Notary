@@ -9,7 +9,7 @@ const client = new SignProtocolClient(SpMode.OnChain, {
     account: privateKeyToAccount(privateKey),
 });
 
-async function createNotaryAttestation(tokenId, oldOwner, newOwner) {
+async function transferOwnership(tokenId, oldOwner, newOwner) {
     try {
         const res = await client.createAttestation({
             schemaId: process.env.SCHEMA_ID,
@@ -20,7 +20,6 @@ async function createNotaryAttestation(tokenId, oldOwner, newOwner) {
             },
             indexingValue: tokenId
         });
-        console.log(res);
         return "Success";
     } catch (e) {
         console.log(e);
@@ -29,4 +28,35 @@ async function createNotaryAttestation(tokenId, oldOwner, newOwner) {
 
 };
 
-module.exports = { createNotaryAttestation };
+async function lendUsageRights(tokenId, borrower) {
+    try {
+        const res = await client.createAttestation({
+            schemaId: process.env.LENDER_SCHEMA_ID,
+            data: {
+                "token_id": tokenId,
+                "borrower": borrower
+            },
+            indexingValue: tokenId
+        });
+        return "Success";
+    } catch (e) {
+        console.log(e);
+        return "Failed";
+    }
+
+};
+
+async function revokeUsageRights(tokenId, attestationId) {
+    try {
+        const res = await client.revokeAttestation(
+            attestationId
+        );
+        return "Success";
+    } catch (e) {
+        console.log(e);
+        return "Failed";
+    }
+
+};
+
+module.exports = { transferOwnership, lendUsageRights, revokeUsageRights };

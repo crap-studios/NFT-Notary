@@ -1,5 +1,6 @@
 const express = require('express');
 const { createNotaryAttestation } = require('./attest');
+const { queryAttestations } = require('./query');
 const app = express();
 
 const port = process.env.PORT;
@@ -8,14 +9,20 @@ app.get('/', (req, res) => {
     res.send('Hello World!')
 });
 
-app.get('/attest', async (req, res) => {
+app.post('/attest', async (req, res) => {
     let params = req.params;
     let tokenId = params['token_id'];
     let newOwner = params['new_owner'];
+    let previousOwner = await queryAttestations(tokenId);
     let response = await
-        createNotaryAttestation(52, '0x0a36550aA7233CF7a92cA3fA3df0279148a4a2C9', '0x8aEfD4112B7Db84B38aeA9354C0bd6e6Dd9620bf');
+        createNotaryAttestation(tokenId, previousOwner, newOwner);
     res.send(response);
+});
 
+app.get('/owner', async (req, res) => {
+    let tokenId = req.params['token_id'];
+    let response = await queryAttestations(tokenId);
+    res.send(owner);
 });
 
 app.listen(port, () => {

@@ -67,6 +67,10 @@ async function queryAttestations(tokenId) {
         }
     }
 
+    if (attests.length === 0) {
+        return process.env.DEFAULT_OWNER
+    }
+
     return attests[0].newOwner;
 }
 

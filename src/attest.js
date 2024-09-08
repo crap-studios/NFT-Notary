@@ -9,7 +9,7 @@ const client = new SignProtocolClient(SpMode.OnChain, {
     account: privateKeyToAccount(privateKey),
 });
 
-async function createNotaryAttestation(tokenId, newOwner, oldOwner) {
+async function createNotaryAttestation(tokenId, oldOwner, newOwner) {
     try {
         const res = await client.createAttestation({
             schemaId: process.env.SCHEMA_ID,

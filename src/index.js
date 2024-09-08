@@ -10,7 +10,7 @@ app.get('/', (req, res) => {
 });
 
 app.post('/attest', async (req, res) => {
-    let params = req.params;
+    let params = req.query;
     let tokenId = params['token_id'];
     let newOwner = params['new_owner'];
     let previousOwner = await queryAttestations(tokenId);
@@ -20,8 +20,8 @@ app.post('/attest', async (req, res) => {
 });
 
 app.get('/owner', async (req, res) => {
-    let tokenId = req.params['token_id'];
-    let response = await queryAttestations(tokenId);
+    let tokenId = req.query['token_id'];
+    let owner = await queryAttestations(tokenId);
     res.send(owner);
 });
 
